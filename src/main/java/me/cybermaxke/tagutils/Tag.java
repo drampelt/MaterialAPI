@@ -19,16 +19,10 @@
 package me.cybermaxke.tagutils;
 
 public abstract class Tag<T> {
-	private String name;
 	private T value;
 	
-	protected Tag(String name, T value) {
-		this.name = name;
+	protected Tag(T value) {
 		this.value = value;
-	}
-
-	public String getName() {
-		return this.name;
 	}
 
 	public T getValue() {

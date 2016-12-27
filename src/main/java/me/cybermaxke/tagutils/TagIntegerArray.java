@@ -20,12 +20,8 @@ package me.cybermaxke.tagutils;
 
 public final class TagIntegerArray extends Tag<int[]> {
 
-	public TagIntegerArray(String name, int[] value) {
-		super(name, value);
-	}
-
 	public TagIntegerArray(int[] value) {
-		super("", value);
+		super(value);
 	}
 
 	@Override
@@ -40,7 +36,7 @@ public final class TagIntegerArray extends Tag<int[]> {
 
 	@Override
 	public TagIntegerArray clone() {
-		return new TagIntegerArray(this.getName(), this.getValue());
+		return new TagIntegerArray(this.getValue());
 	}
 	
 	@Override

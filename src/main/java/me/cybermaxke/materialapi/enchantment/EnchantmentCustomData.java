@@ -50,6 +50,16 @@ public class EnchantmentCustomData extends EnchantmentCustom {
 	}
 
 	@Override
+	public boolean isTreasure() {
+		return false;
+	}
+
+	@Override
+	public boolean isCursed() {
+		return false;
+	}
+
+	@Override
 	public int getMaxLevel() {
 		return 99999;
 	}

@@ -20,12 +20,8 @@ package me.cybermaxke.tagutils;
 
 public final class TagByte extends Tag<Byte> {
 
-	public TagByte(String name, Byte value) {
-		super(name, value);
-	}
-
 	public TagByte(Byte value) {
-		super("", value);
+		super(value);
 	}
 
 	@Override
@@ -40,7 +36,7 @@ public final class TagByte extends Tag<Byte> {
 
 	@Override
 	public TagByte clone() {
-		return new TagByte(this.getName(), this.getValue());
+		return new TagByte(this.getValue());
 	}
 
 	@Override

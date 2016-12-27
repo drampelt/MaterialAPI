@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'cybermaxke'
+version = '2.1'
+
+description = """MaterialAPI"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    compile name: 'craftbukkit'
+}

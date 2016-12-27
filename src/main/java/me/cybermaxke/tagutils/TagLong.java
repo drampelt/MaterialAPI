@@ -20,12 +20,8 @@ package me.cybermaxke.tagutils;
 
 public final class TagLong extends Tag<Long> {
 
-	public TagLong(String name, Long value) {
-		super(name, value);
-	}
-
 	public TagLong(Long value) {
-		super("", value);
+		super(value);
 	}
 
 	@Override
@@ -40,7 +36,7 @@ public final class TagLong extends Tag<Long> {
 
 	@Override
 	public TagLong clone() {
-		return new TagLong(this.getName(), this.getValue());
+		return new TagLong(this.getValue());
 	}
 	
 	@Override

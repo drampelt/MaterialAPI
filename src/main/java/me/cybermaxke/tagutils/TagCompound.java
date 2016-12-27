@@ -26,16 +26,12 @@ import java.util.Map.Entry;
 
 public final class TagCompound extends Tag<TagMap> {
 	
-	public TagCompound(String name, TagMap value) {
-		super(name, value);
+	public TagCompound(TagMap value) {
+		super(value);
 	}
-	
-	public TagCompound(String name) {
-		super(name, new TagMap());
-	}
-	
+
 	public TagCompound() {
-		this("");
+	    super(new TagMap());
 	}
 
 	public void set(String key, Tag<?> tag) {
@@ -43,27 +39,27 @@ public final class TagCompound extends Tag<TagMap> {
 	}
 
 	public void setString(String key, String value) {
-		this.set(key, new TagString(key, value));
+		this.set(key, new TagString(value));
 	}
 
 	public void setInteger(String key, Integer value) {
-		this.set(key, new TagInteger(key, value));
+		this.set(key, new TagInteger(value));
 	}
 
 	public void setByte(String key, Byte value) {
-		this.set(key, new TagByte(key, value));
+		this.set(key, new TagByte(value));
 	}
 
 	public void setLong(String key, Long value) {
-		this.set(key, new TagLong(key, value));
+		this.set(key, new TagLong(value));
 	}
 
 	public void setFloat(String key, Float value) {
-		this.set(key, new TagFloat(key, value));
+		this.set(key, new TagFloat(value));
 	}
 
 	public void setBoolean(String key, Boolean value) {
-		this.set(key, new TagByte(key, (byte) (value ? 1 : 0)));
+		this.set(key, new TagByte((byte) (value ? 1 : 0)));
 	}
 
 	public void setList(String key, TagList list) {
@@ -71,7 +67,7 @@ public final class TagCompound extends Tag<TagMap> {
 	}
 
 	public void setDouble(String key, Double value) {
-		this.set(key, new TagDouble(key, value));
+		this.set(key, new TagDouble(value));
 	}
 
 	public void setCompound(String key, TagCompound tag) {
@@ -187,7 +183,7 @@ public final class TagCompound extends Tag<TagMap> {
 
 	@Override
 	public TagCompound clone() {
-		return new TagCompound(this.getName(), this.getValue());
+		return new TagCompound(this.getValue());
 	}
 	
 	@Override

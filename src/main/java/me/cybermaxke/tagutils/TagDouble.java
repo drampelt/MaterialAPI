@@ -20,12 +20,8 @@ package me.cybermaxke.tagutils;
 
 public final class TagDouble extends Tag<Double> {
 
-	public TagDouble(String name, Double value) {
-		super(name, value);
-	}
-	
 	public TagDouble(Double value) {
-		super("", value);
+		super(value);
 	}
 
 	@Override
@@ -40,7 +36,7 @@ public final class TagDouble extends Tag<Double> {
 
 	@Override
 	public TagDouble clone() {
-		return new TagDouble(this.getName(), this.getValue());
+		return new TagDouble(this.getValue());
 	}
 	
 	@Override

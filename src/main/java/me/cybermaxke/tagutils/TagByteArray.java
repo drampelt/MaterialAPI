@@ -20,12 +20,8 @@ package me.cybermaxke.tagutils;
 
 public final class TagByteArray extends Tag<byte[]> {
 
-	public TagByteArray(String name, byte[] value) {
-		super(name, value);
-	}
-	
 	public TagByteArray(byte[] value) {
-		super("", value);
+		super(value);
 	}
 
 	@Override
@@ -40,7 +36,7 @@ public final class TagByteArray extends Tag<byte[]> {
 	
 	@Override
 	public TagByteArray clone() {
-		return new TagByteArray(this.getName(), this.getValue());
+		return new TagByteArray(this.getValue());
 	}
 
 	@Override

@@ -18,22 +18,20 @@
  */
 package me.cybermaxke.tagutils;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import net.minecraft.server.v1_11_R1.*;
+import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemStack;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import net.minecraft.server.v1_5_R3.*;
-
-import org.bukkit.craftbukkit.v1_5_R3.inventory.CraftItemStack;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class TagUtils {
 
@@ -45,21 +43,21 @@ public class TagUtils {
 			case 0:
 				return new TagEnd();
 			case 1:
-				return new TagByte(tag.getName(), ((NBTTagByte) tag).data);
+				return new TagByte(((NBTTagByte) tag).g());
 			case 2:
-				return new TagShort(tag.getName(), ((NBTTagShort) tag).data);
+				return new TagShort(((NBTTagShort) tag).f());
 			case 3:
-				return new TagInteger(tag.getName(), ((NBTTagInt) tag).data);
+				return new TagInteger(((NBTTagInt) tag).e());
 			case 4:
-				return new TagLong(tag.getName(), ((NBTTagLong) tag).data);
+				return new TagLong(((NBTTagLong) tag).d());
 			case 5:
-				return new TagFloat(tag.getName(), ((NBTTagFloat) tag).data);
+				return new TagFloat(((NBTTagFloat) tag).i());
 			case 6:
-				return new TagDouble(tag.getName(), ((NBTTagDouble) tag).data);
+				return new TagDouble(((NBTTagDouble) tag).asDouble());
 			case 7:
-				return new TagByteArray(tag.getName(), ((NBTTagByteArray) tag).data);
+				return new TagByteArray(((NBTTagByteArray) tag).c());
 			case 8:
-				return new TagString(tag.getName(), ((NBTTagString) tag).data);
+				return new TagString(((NBTTagString) tag).c_());
 			case 9:
 				List<Tag<?>> tags = new ArrayList<Tag<?>>();
 
@@ -72,9 +70,9 @@ public class TagUtils {
 					}
 				} catch (Exception e1) {}
 
-				return new TagList(tag.getName(), tags);
+				return new TagList(tags);
 			case 10:
-				TagCompound c = new TagCompound(tag.getName());
+				TagCompound c = new TagCompound();
 
 				try {
 					Field f2 = NBTTagCompound.class.getDeclaredField("map");
@@ -88,7 +86,7 @@ public class TagUtils {
 
 				return c;
 			case 11:
-				return new TagIntegerArray(((NBTTagIntArray) tag).data);
+				return new TagIntegerArray(((NBTTagIntArray) tag).d());
 			default:
 				return null;
 		}
@@ -99,39 +97,49 @@ public class TagUtils {
 
 		switch (d) {
 			case 0:
-				return new NBTTagEnd();
+				return createEndTag();
 			case 1:
-				return new NBTTagByte(tag.getName(), (Byte) tag.getValue());
+				return new NBTTagByte((Byte) tag.getValue());
 			case 2:
-				return new NBTTagShort(tag.getName(), (Short) tag.getValue());
+				return new NBTTagShort((Short) tag.getValue());
 			case 3:
-				return new NBTTagInt(tag.getName(), (Integer) tag.getValue());
+				return new NBTTagInt((Integer) tag.getValue());
 			case 4:
-				return new NBTTagLong(tag.getName(), (Long) tag.getValue());
+				return new NBTTagLong((Long) tag.getValue());
 			case 5:
-				return new NBTTagFloat(tag.getName(), (Float) tag.getValue());
+				return new NBTTagFloat((Float) tag.getValue());
 			case 6:
-				return new NBTTagDouble(tag.getName(), (Double) tag.getValue());
+				return new NBTTagDouble((Double) tag.getValue());
 			case 7:
-				return new NBTTagByteArray(tag.getName(), (byte[]) tag.getValue());
+				return new NBTTagByteArray((byte[]) tag.getValue());
 			case 8:
-				return new NBTTagString(tag.getName(), (String) tag.getValue());
+				return new NBTTagString((String) tag.getValue());
 			case 9:
-				NBTTagList l = new NBTTagList(tag.getName());
+				NBTTagList l = new NBTTagList();
 				for (Tag<?> t : ((TagList) tag).getValue()) {
 					l.add(createTag((Tag<?>) t));
 				}
 				return l;
 			case 10:
-				NBTTagCompound c = new NBTTagCompound(tag.getName());			
+				NBTTagCompound c = new NBTTagCompound();
 				for (Entry<String, Tag<?>> en : ((TagCompound) tag).entrySet()) {
 					c.set(en.getKey(), createTag((Tag<?>) en.getValue()));
 				}
 				return c;
 			case 11:
-				return new NBTTagIntArray(tag.getName(), (int[]) tag.getValue());
+				return new NBTTagIntArray((int[]) tag.getValue());
 			default:
 				return null;
+		}
+	}
+
+	private static NBTTagEnd createEndTag() {
+		Constructor constructor = NBTTagEnd.class.getDeclaredConstructors()[0];
+		constructor.setAccessible(true);
+		try {
+			return (NBTTagEnd) constructor.newInstance();
+		} catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+		    return null;
 		}
 	}
 
@@ -151,7 +159,9 @@ public class TagUtils {
 		try {
 			FileOutputStream fos = new FileOutputStream(target);
 			DataOutputStream dos = new DataOutputStream(fos);
-			NBTBase.a(createTag(tag), dos);
+//			NBTBase.a(createTag(tag), dos);
+            Method method = NBTBase.class.getDeclaredMethod("write", DataOutput.class);
+            method.invoke(createTag(tag), dos);
 			dos.close();
 			fos.close();
 		} catch (Exception e) {
@@ -169,7 +179,8 @@ public class TagUtils {
 		try {		
 			FileInputStream fis = new FileInputStream(target);
 			DataInputStream dis = new DataInputStream(fis);
-			NBTBase t = NBTBase.b(dis);
+			NBTBase t = createEmptyTag();
+			Method method = NBTBase.class.getDeclaredMethod("load", DataInput.class, int.class, NBTReadLimiter.class);
 			dis.close();
 			fis.close();
 			return createTag(t);
@@ -178,19 +189,29 @@ public class TagUtils {
 		return null;
 	}
 
+	private static NBTBase createEmptyTag() {
+		try {
+			Method method = NBTBase.class.getDeclaredMethod("createTag", byte.class);
+			return (NBTBase) method.invoke(null);
+		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+		    return null;
+		}
+	}
+
 	public static <T extends Tag<?>> T load(Class<T> clazz, File target) {
 		return clazz.cast(load(target));
 	}
 
 	public static TagCompound getItemStackAsTag(ItemStack itemstack) {
-		net.minecraft.server.v1_5_R3.ItemStack is = CraftItemStack.asNMSCopy(itemstack);
+		net.minecraft.server.v1_11_R1.ItemStack is = CraftItemStack.asNMSCopy(itemstack);
 		NBTTagCompound c = is.save(new NBTTagCompound());
 		return (TagCompound) createTag(c);
 	}
 
 	public static ItemStack getItemStackFromTag(TagCompound tag) {
 		NBTTagCompound c = (NBTTagCompound) createTag(tag);
-		return CraftItemStack.asCraftMirror(net.minecraft.server.v1_5_R3.ItemStack.createStack(c));
+//		return CraftItemStack.asCraftMirror(net.minecraft.server.v1_11_R1.ItemStack.createStack(c));
+        return null;
 	}
 
 	public static TagCompound getInventoryAsTag(Inventory inventory) {
@@ -214,20 +235,32 @@ public class TagUtils {
 	}
 
 	public static TagCompound getTag(ItemStack itemstack) {
-		net.minecraft.server.v1_5_R3.ItemStack is = CraftItemStack.asNMSCopy(itemstack);
+		net.minecraft.server.v1_11_R1.ItemStack is = CraftItemStack.asNMSCopy(itemstack);
 		if (is == null) {
 			return null;
 		}
-		NBTTagCompound t = is.tag;
-		return (TagCompound) (t == null ? null : createTag(t));
+		try {
+			Field field = net.minecraft.server.v1_11_R1.ItemStack.class.getDeclaredField("tag");
+			field.setAccessible(true);
+			NBTTagCompound t = (NBTTagCompound) field.get(is);
+			return (TagCompound) (t == null ? null : createTag(t));
+		} catch (NoSuchFieldException | IllegalAccessException e) {
+			return null;
+		}
 	}
 
 	public static ItemStack setTag(ItemStack itemstack, TagCompound tag) {
-		net.minecraft.server.v1_5_R3.ItemStack is = CraftItemStack.asNMSCopy(itemstack);
+		net.minecraft.server.v1_11_R1.ItemStack is = CraftItemStack.asNMSCopy(itemstack);
 		if (is == null) {
 			return itemstack;
 		}
-		is.tag = (NBTTagCompound) (tag == null ? null : createTag(tag));
+		try {
+			Field field = net.minecraft.server.v1_11_R1.ItemStack.class.getDeclaredField("tag");
+			field.setAccessible(true);
+			field.set(is, tag == null ? null : (NBTTagCompound) createTag(tag));
+		} catch (NoSuchFieldException | IllegalAccessException e) {
+		    return itemstack;
+		}
 		return CraftItemStack.asCraftMirror(is);
 	}
 

@@ -20,12 +20,8 @@ package me.cybermaxke.tagutils;
 
 public final class TagEnd extends Tag<Object> {
 
-	public TagEnd(String name) {
-		super(name, null);
-	}
-	
 	public TagEnd() {
-		super("", null);
+		super(null);
 	}
 
 	@Override
@@ -40,7 +36,7 @@ public final class TagEnd extends Tag<Object> {
 
 	@Override
 	public TagEnd clone() {
-		return new TagEnd(this.getName());
+		return new TagEnd();
 	}
 	
 	@Override

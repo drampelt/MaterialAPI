@@ -23,18 +23,14 @@ import java.util.List;
 
 public final class TagList extends Tag<List<Tag<?>>> {
 
-	public TagList(String name, List<Tag<?>> value) {
-		super(name, value);
-	}
-	
-	public TagList(String name) {
-		super(name, new ArrayList<Tag<?>>());
+	public TagList(List<Tag<?>> value) {
+		super(value);
 	}
 	
 	public TagList() {
-		this("");
+		super(new ArrayList<Tag<?>>());
 	}
-
+	
 	@Override
 	public String getTagName() {
 		return "TAG_List";
@@ -47,7 +43,7 @@ public final class TagList extends Tag<List<Tag<?>>> {
 
 	@Override
 	public TagList clone() {
-		return new TagList(this.getName(), this.getValue());
+		return new TagList(this.getValue());
 	}
 	
 	@Override

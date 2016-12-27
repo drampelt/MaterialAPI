@@ -20,12 +20,8 @@ package me.cybermaxke.tagutils;
 
 public final class TagFloat extends Tag<Float> {
 
-	public TagFloat(String name, Float value) {
-		super(name, value);
-	}
-
 	public TagFloat(Float value) {
-		super("", value);
+		super(value);
 	}
 
 	@Override
@@ -40,7 +36,7 @@ public final class TagFloat extends Tag<Float> {
 
 	@Override
 	public TagFloat clone() {
-		return new TagFloat(this.getName(), this.getValue());
+		return new TagFloat(this.getValue());
 	}
 	
 	@Override
