@@ -2,7 +2,7 @@ package me.cybermaxke.materialfactory.v18r3.enbt;
 
 import com.google.common.collect.Lists;
 import me.cybermaxke.materialfactory.api.util.Coerce;
-import net.minecraft.server.v1_8_R3.NBTTagList;
+import net.minecraft.server.v1_11_R1.NBTTagList;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,12 +52,12 @@ public class SerialCollection implements EnbtSerializer<Collection, NBTTagList> 
                 list.add(ctx.deserialize(tag0.get(i)));
             }
         } else {
-            int type = extraData.length > 0 ? extraData[0] : tag0.f();
+            int type = extraData.length > 0 ? extraData[0] : tag0.g();
             if (extraData.length > 1) {
                 extraData = Arrays.copyOfRange(extraData, 1, extraData.length);
             }
             for (int i = 0; i < tag0.size(); i++) {
-                list.add(ctx.deserializeFromEntry(new EnbtEntry(tag0.g(i), type, extraData)));
+                list.add(ctx.deserializeFromEntry(new EnbtEntry(tag0.h(i), type, extraData)));
             }
         }
         return list;

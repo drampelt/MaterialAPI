@@ -1,6 +1,6 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagFloat;
+import net.minecraft.server.v1_11_R1.NBTTagFloat;
 
 public class SerialFloat implements EnbtSerializer<Float, NBTTagFloat> {
 
@@ -11,7 +11,7 @@ public class SerialFloat implements EnbtSerializer<Float, NBTTagFloat> {
 
     @Override
     public Float deserialize(EnbtSerializerContext ctx, EnbtSerializerData<NBTTagFloat> tag) {
-        return tag.getTag().h();
+        return tag.getTag().i();
     }
 
 }

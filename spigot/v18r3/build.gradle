@@ -46,12 +46,16 @@ repositories {
         name = 'minecraft'
         url = 'https://libraries.minecraft.net/'
     }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 // Dependencies
 dependencies {
     compile project(':materialfactory-common')
-    compile 'org.spigotmc:spigot:1.8.8'
+//    compile 'org.spigotmc:spigot:1.8.8'
+    compile name: 'spigot-1.11.2'
     compile 'org.spongepowered:mixin:0.4.7-SNAPSHOT'
     compile 'org.apache.logging.log4j:log4j-api:2.0-beta9'
     compile 'org.apache.logging.log4j:log4j-core:2.0-beta9'
@@ -93,7 +97,8 @@ shadowJar {
 assemble.dependsOn shadowJar
 
 processResources {
-	ext.set('mainclass', 'me.cybermaxke.materialfactory.plugin.MaterialFactoryPlugin')
+//	ext.set('mainclass', 'me.cybermaxke.materialfactory.plugin.MaterialFactoryPlugin')
+    ext.set('mainclass', 'me.cybermaxke.materialfactory.common.MinecraftPlugin')
 
 	// This will ensure that this task is redone when the versions change.
 	inputs.property "name", project.theName
@@ -109,7 +114,7 @@ processResources {
 
 	// Replace stuff in plugin.yml, nothing else
 	from(sourceSets.main.resources.srcDirs) {
-		include 'thePlugin.yml'
+		include 'plugin.yml'
 
 		// Replace the properties
 		expand([
@@ -126,6 +131,6 @@ processResources {
 
 	// Copy everything else, thats not the plugin.yml
 	from(sourceSets.main.resources.srcDirs) {
-		exclude 'thePlugin.yml'
+		exclude 'plugin.yml'
 	}
 }

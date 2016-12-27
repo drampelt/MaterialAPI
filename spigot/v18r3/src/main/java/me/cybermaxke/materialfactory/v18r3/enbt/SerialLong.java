@@ -1,6 +1,6 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagLong;
+import net.minecraft.server.v1_11_R1.NBTTagLong;
 
 public class SerialLong implements EnbtSerializer<Long, NBTTagLong> {
 
@@ -11,7 +11,7 @@ public class SerialLong implements EnbtSerializer<Long, NBTTagLong> {
 
     @Override
     public Long deserialize(EnbtSerializerContext ctx, EnbtSerializerData<NBTTagLong> tag) {
-        return tag.getTag().c();
+        return tag.getTag().d();
     }
 
 }

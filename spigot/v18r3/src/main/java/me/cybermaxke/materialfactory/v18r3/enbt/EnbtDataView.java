@@ -1,7 +1,5 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import static me.cybermaxke.materialfactory.api.data.DataQuery.of;
-
 import com.google.common.base.Equivalence;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -15,13 +13,15 @@ import me.cybermaxke.materialfactory.api.data.DataQuery;
 import me.cybermaxke.materialfactory.api.data.DataView;
 import me.cybermaxke.materialfactory.api.util.CacheBuilderHelper;
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinNBTTagCompound;
-import net.minecraft.server.v1_8_R3.NBTBase;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTBase;
+import net.minecraft.server.v1_11_R1.NBTTagCompound;
 
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+
+import static me.cybermaxke.materialfactory.api.data.DataQuery.of;
 
 public class EnbtDataView extends AbstractDataView {
 

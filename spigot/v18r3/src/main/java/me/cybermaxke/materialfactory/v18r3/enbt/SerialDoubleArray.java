@@ -1,7 +1,7 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagDouble;
-import net.minecraft.server.v1_8_R3.NBTTagList;
+import net.minecraft.server.v1_11_R1.NBTTagDouble;
+import net.minecraft.server.v1_11_R1.NBTTagList;
 
 public class SerialDoubleArray implements EnbtSerializer<double[], NBTTagList> {
 
@@ -18,7 +18,7 @@ public class SerialDoubleArray implements EnbtSerializer<double[], NBTTagList> {
     public double[] deserialize(EnbtSerializerContext ctx, EnbtSerializerData<NBTTagList> tag) {
         double[] object = new double[tag.getTag().size()];
         for (int i = 0; i < object.length; i++) {
-            object[i] = ((NBTTagDouble) tag.getTag().g(i)).g();
+            object[i] = ((NBTTagDouble) tag.getTag().h(i)).asDouble();
         }
         return object;
     }

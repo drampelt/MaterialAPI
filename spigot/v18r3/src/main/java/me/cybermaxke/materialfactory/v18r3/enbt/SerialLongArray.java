@@ -1,7 +1,7 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagList;
-import net.minecraft.server.v1_8_R3.NBTTagLong;
+import net.minecraft.server.v1_11_R1.NBTTagList;
+import net.minecraft.server.v1_11_R1.NBTTagLong;
 
 public class SerialLongArray implements EnbtSerializer<long[], NBTTagList> {
 
@@ -18,7 +18,7 @@ public class SerialLongArray implements EnbtSerializer<long[], NBTTagList> {
     public long[] deserialize(EnbtSerializerContext ctx, EnbtSerializerData<NBTTagList> tag) {
         long[] object = new long[tag.getTag().size()];
         for (int i = 0; i < object.length; i++) {
-            object[i] = ((NBTTagLong) tag.getTag().g(i)).c();
+            object[i] = ((NBTTagLong) tag.getTag().h(i)).d();
         }
         return object;
     }

@@ -1,8 +1,8 @@
 package me.cybermaxke.materialfactory.v18r3.mixin.minecraft;
 
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinNBTTagCompound;
-import net.minecraft.server.v1_8_R3.NBTBase;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTBase;
+import net.minecraft.server.v1_11_R1.NBTTagCompound;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 

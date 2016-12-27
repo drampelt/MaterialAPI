@@ -1,6 +1,6 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagIntArray;
+import net.minecraft.server.v1_11_R1.NBTTagIntArray;
 
 public class SerialBoxedIntArray implements EnbtSerializer<Integer[], NBTTagIntArray> {
 
@@ -15,7 +15,7 @@ public class SerialBoxedIntArray implements EnbtSerializer<Integer[], NBTTagIntA
 
     @Override
     public Integer[] deserialize(EnbtSerializerContext ctx, EnbtSerializerData<NBTTagIntArray> tag) {
-        int[] array = tag.getTag().c();
+        int[] array = tag.getTag().d();
         Integer[] object = new Integer[array.length];
         for (int i = 0; i < array.length; i++) {
             object[i] = array[i];

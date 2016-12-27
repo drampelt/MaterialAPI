@@ -1,7 +1,7 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagFloat;
-import net.minecraft.server.v1_8_R3.NBTTagList;
+import net.minecraft.server.v1_11_R1.NBTTagFloat;
+import net.minecraft.server.v1_11_R1.NBTTagList;
 
 public class SerialFloatArray implements EnbtSerializer<float[], NBTTagList> {
 
@@ -18,7 +18,7 @@ public class SerialFloatArray implements EnbtSerializer<float[], NBTTagList> {
     public float[] deserialize(EnbtSerializerContext ctx, EnbtSerializerData<NBTTagList> tag) {
         float[] object = new float[tag.getTag().size()];
         for (int i = 0; i < object.length; i++) {
-            object[i] = ((NBTTagFloat) tag.getTag().g(i)).h();
+            object[i] = ((NBTTagFloat) tag.getTag().h(i)).i();
         }
         return object;
     }

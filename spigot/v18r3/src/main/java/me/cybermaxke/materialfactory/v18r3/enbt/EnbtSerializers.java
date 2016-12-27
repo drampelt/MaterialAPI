@@ -1,8 +1,8 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
 import com.google.common.collect.Maps;
-import net.minecraft.server.v1_8_R3.IntHashMap;
-import net.minecraft.server.v1_8_R3.NBTBase;
+import net.minecraft.server.v1_11_R1.IntHashMap;
+import net.minecraft.server.v1_11_R1.NBTBase;
 
 import java.util.Collection;
 import java.util.Map;

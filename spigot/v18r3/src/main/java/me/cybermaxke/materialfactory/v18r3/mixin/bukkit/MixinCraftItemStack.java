@@ -1,16 +1,14 @@
 package me.cybermaxke.materialfactory.v18r3.mixin.bukkit;
 
-import static me.cybermaxke.materialfactory.common.ItemFactoryConstants.CUSTOM_ITEM_TYPE;
-
 import me.cybermaxke.materialfactory.api.item.ItemType;
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinCraftItemStack;
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinItemMeta;
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinItemStack;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTTagCompound;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemFactory;
-import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_8_R3.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemFactory;
+import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_11_R1.util.CraftMagicNumbers;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,13 +17,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static me.cybermaxke.materialfactory.common.ItemFactoryConstants.CUSTOM_ITEM_TYPE;
+
 @Mixin(CraftItemStack.class)
 public abstract class MixinCraftItemStack extends MixinItemStack implements IMixinCraftItemStack {
 
-    @Shadow(remap = false) net.minecraft.server.v1_8_R3.ItemStack handle;
+    @Shadow(remap = false) net.minecraft.server.v1_11_R1.ItemStack handle;
 
     @Override
-    public net.minecraft.server.v1_8_R3.ItemStack getHandle() {
+    public net.minecraft.server.v1_11_R1.ItemStack getHandle() {
         return this.handle;
     }
 
@@ -37,14 +37,14 @@ public abstract class MixinCraftItemStack extends MixinItemStack implements IMix
         }
     }
 
-    private static Material getType(net.minecraft.server.v1_8_R3.ItemStack item) {
+    private static Material getType(net.minecraft.server.v1_11_R1.ItemStack item) {
         final Material material = Material.getMaterial(item == null ? 0 : CraftMagicNumbers.getId(item.getItem()));
         return material == null ? Material.AIR : material;
     }
 
-    @Inject(method = "setItemMeta(Lnet/minecraft/server/v1_8_R3/ItemStack;Lorg/bukkit/inventory/meta/ItemMeta;)Z",
+    @Inject(method = "setItemMeta(Lnet/minecraft/server/v1_11_R1/ItemStack;Lorg/bukkit/inventory/meta/ItemMeta;)Z",
             at = @At("HEAD"), cancellable = true, remap = false)
-    private static void onSetItemMeta(net.minecraft.server.v1_8_R3.ItemStack item, ItemMeta itemMeta, CallbackInfoReturnable<Boolean> ci) {
+    private static void onSetItemMeta(net.minecraft.server.v1_11_R1.ItemStack item, ItemMeta itemMeta, CallbackInfoReturnable<Boolean> ci) {
         if (item == null) {
             ci.setReturnValue(false);
             return;

@@ -6,8 +6,8 @@ import me.cybermaxke.materialfactory.api.data.DataContainer;
 import me.cybermaxke.materialfactory.api.data.DataQuery;
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinItemMeta;
 import me.cybermaxke.materialfactory.v18r3.enbt.EnbtDataContainer;
-import net.minecraft.server.v1_8_R3.NBTBase;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTBase;
+import net.minecraft.server.v1_11_R1.NBTTagCompound;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Map;
 
-@Mixin(targets = "org.bukkit.craftbukkit.v1_8_R3.inventory.CraftMetaItem")
+@Mixin(targets = "org.bukkit.craftbukkit.v1_11_R1.inventory.CraftMetaItem")
 public abstract class MixinCraftMetaItem implements ItemMeta, Repairable, IMixinItemMeta {
 
     @Shadow(remap = false) private Map<String, NBTBase> unhandledTags;

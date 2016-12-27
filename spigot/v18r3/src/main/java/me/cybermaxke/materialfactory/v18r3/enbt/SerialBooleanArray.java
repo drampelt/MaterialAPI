@@ -1,6 +1,6 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagByteArray;
+import net.minecraft.server.v1_11_R1.NBTTagByteArray;
 
 public class SerialBooleanArray implements EnbtSerializer<boolean[], NBTTagByteArray> {
 

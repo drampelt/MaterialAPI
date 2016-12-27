@@ -9,7 +9,7 @@ import com.google.common.cache.LoadingCache;
 import me.cybermaxke.materialfactory.api.data.DataContainer;
 import me.cybermaxke.materialfactory.api.data.DataQuery;
 import me.cybermaxke.materialfactory.api.data.DataView;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTTagCompound;
 
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;

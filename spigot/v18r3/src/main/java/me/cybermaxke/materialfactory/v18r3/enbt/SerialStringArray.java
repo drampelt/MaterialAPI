@@ -1,7 +1,7 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagList;
-import net.minecraft.server.v1_8_R3.NBTTagString;
+import net.minecraft.server.v1_11_R1.NBTTagList;
+import net.minecraft.server.v1_11_R1.NBTTagString;
 
 public class SerialStringArray implements EnbtSerializer<String[], NBTTagList> {
 

@@ -1,26 +1,19 @@
 package me.cybermaxke.materialfactory.v18r3.mixin.bukkit;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static me.cybermaxke.materialfactory.common.ItemFactoryConstants.CUSTOM_ITEM_TYPE;
-
 import me.cybermaxke.materialfactory.api.inventory.ExtendedItemStack;
 import me.cybermaxke.materialfactory.api.inventory.ItemData;
-import me.cybermaxke.materialfactory.api.item.ItemRegistry;
-import me.cybermaxke.materialfactory.api.item.ItemType;
-import me.cybermaxke.materialfactory.api.item.ItemTypes;
-import me.cybermaxke.materialfactory.api.item.RegisteredItemType;
-import me.cybermaxke.materialfactory.api.item.VanillaItemType;
+import me.cybermaxke.materialfactory.api.item.*;
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinCraftItemStack;
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinItemMeta;
 import me.cybermaxke.materialfactory.v18r3.interfaces.IMixinItemStack;
-import net.minecraft.server.v1_8_R3.Item;
-import net.minecraft.server.v1_8_R3.NBTBase;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import net.minecraft.server.v1_8_R3.NBTTagString;
+import net.minecraft.server.v1_11_R1.Item;
+import net.minecraft.server.v1_11_R1.NBTBase;
+import net.minecraft.server.v1_11_R1.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTTagString;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.craftbukkit.v1_8_R3.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_11_R1.util.CraftMagicNumbers;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,6 +24,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static me.cybermaxke.materialfactory.common.ItemFactoryConstants.CUSTOM_ITEM_TYPE;
 
 @Mixin(ItemStack.class)
 public abstract class MixinItemStack implements Cloneable, ConfigurationSerializable, IMixinItemStack {
@@ -108,7 +104,7 @@ public abstract class MixinItemStack implements Cloneable, ConfigurationSerializ
         } else if (this.meta != null) {
             Map<String, NBTBase> map = ((IMixinItemMeta) this.meta).getUnhandledTags();
             if (map.containsKey(CUSTOM_ITEM_TYPE)) {
-                itemId = ((NBTTagString) map.get(CUSTOM_ITEM_TYPE)).a_();
+                itemId = ((NBTTagString) map.get(CUSTOM_ITEM_TYPE)).c_();
             }
         }
         if (itemId != null) {

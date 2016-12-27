@@ -1,6 +1,6 @@
 package me.cybermaxke.materialfactory.v18r3.enbt;
 
-import net.minecraft.server.v1_8_R3.NBTTagByte;
+import net.minecraft.server.v1_11_R1.NBTTagByte;
 
 public class SerialByte implements EnbtSerializer<Byte, NBTTagByte> {
 
@@ -11,7 +11,7 @@ public class SerialByte implements EnbtSerializer<Byte, NBTTagByte> {
 
     @Override
     public Byte deserialize(EnbtSerializerContext ctx, EnbtSerializerData<NBTTagByte> tag) {
-        return tag.getTag().f();
+        return tag.getTag().g();
     }
 
 }

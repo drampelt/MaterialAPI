@@ -4,7 +4,7 @@ import me.cybermaxke.materialfactory.api.item.VanillaItemType;
 import me.cybermaxke.materialfactory.common.SimpleItemRegistry;
 
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_8_R3.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_11_R1.util.CraftMagicNumbers;
 
 import java.util.Optional;
 
